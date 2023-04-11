@@ -47,4 +47,30 @@ mumber of identifires: 5
 the number of operators: 6
 the number of values: 1
 
+# Ex09 - Shift Reduce Parser for the following grammar
+E=E+E | E*E | (E)| id
+
+Output:
+Enter valid Input String for Shift-Reduce Parsing:id+id*id$
+Given Input word is: ['id', '+', 'id', '*', 'id', '$']
+======================================================================
+Stack          	InputBuffer              	Action         
+======================================================================
+[$]            	[id, +, id, *, id, $]    	Begins         
+[$, id]        	[+, id, *, id, $]        	Shift          
+[$, E]         	[+, id, *, id, $]        	E=id           
+[$, E]         	[+, id, *, id, $]        	None           
+[$, E, +]      	[id, *, id, $]           	Shift          
+[$, E, +]      	[id, *, id, $]           	None           
+[$, E, +]      	[id, *, id, $]           	None           
+[$, E, +, id]  	[*, id, $]               	Shift          
+[$, E, +, E]   	[*, id, $]               	E=id           
+[$, E]         	[*, id, $]               	Reduce by E=E+E
+[$, E, *]      	[id, $]                  	Shift          
+[$, E, *]      	[id, $]                  	None           
+[$, E, *]      	[id, $]                  	None           
+[$, E, *, id]  	[$]                      	Shift          
+[$, E, *, E]   	[$]                      	E=id           
+[$, E]         	[$]                      	Reduce by E=E*E
+[$, E]         	[$]                      	Accepted - Done
 
